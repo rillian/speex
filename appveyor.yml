@@ -1,0 +1,23 @@
+image: Visual Studio 2008
+configuration:
+- Debug
+- Release
+- Release_Dynamic
+- Release_Dynamic_SSE
+- Release_SSE
+- Release_SSE2
+- Release_Static_SSE
+
+platform:
+- Win32
+
+build:
+  project: win32\VS2008\libspeex.sln
+  parallel: true
+  verbosity: minimal
+
+after_build:
+- cmd: 7z a speex.zip win32\VS208\%PLATFORM%\%CONFIGURATION%\libspeex.lib include\speex\*.h
+
+artifacts:
+- path: speex.zip
